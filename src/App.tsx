@@ -17,7 +17,7 @@ function App() {
     // try... catch documentation:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch
     try {
-      const res = await fetch(`http://localhost:4000${endpoint}`);
+      const res = await fetch(`https://digipet-backend-lm.herokuapp.com${endpoint}`);
       const body = await res.json();
       setMessage(body.message);
       setDigipetStats(body.digipet);
@@ -44,6 +44,7 @@ function App() {
       {message && <p>{message}</p>}
       <hr />
       <DigipetData digipet={digipetStats} />
+      {digipetStats && <img src="https://64.media.tumblr.com/2c790b414ef20fce4602da44444dfd75/tumblr_pqkdier4Mg1rizmbmo1_1280.png" width="200" height="200" alt="Your digipet"/>}
       <hr />
       <DigipetActions
         actions={[
@@ -55,7 +56,22 @@ function App() {
             name: "Walk",
             handler: () => loadDataFromEndpoint("/digipet/walk"),
           },
-          { name: "Feed" },
+          { 
+            name: "Feed", 
+            handler: () => loadDataFromEndpoint("/digipet/train")
+          },
+          { 
+            name: "Feed", 
+            handler: () => loadDataFromEndpoint("/digipet/feed")
+          },
+          { 
+            name: "Ignore", 
+            handler: () => loadDataFromEndpoint("/digipet/ignore")
+          },
+          { 
+            name: "Rehome", 
+            handler: () => loadDataFromEndpoint("/digipet/rehome")
+          },
         ]}
       />
     </main>
